@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Despacho · TOP 30 CHI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef2f6;
+  --card:#ffffff;
+  --line:#d8e1ea;
+  --line-soft:#e9eff5;
+  --text:#102131;
+  --muted:#66798d;
+  --shadow:0 10px 28px rgba(15,23,42,.08);
+  --radius:18px;
+
+  --green:#16a34a;
+  --blue:#2563eb;
+  --amber:#f59e0b;
+  --orange:#f97316;
+  --red:#dc2626;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  color:var(--text);
+  background:linear-gradient(180deg,#f8fafc 0%,var(--bg) 100%);
+}
+.page-shell{width:min(1880px,100%);margin:0 auto;padding:12px;display:flex;flex-direction:column;gap:12px;height:100vh}
+.card{
+  background:var(--card);
+  border:1px solid var(--line-soft);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.header-card{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:12px 16px; flex:0 0 auto;
+}
+.eyebrow{
+  font-size:10px; font-weight:800; letter-spacing:.14em;
+  text-transform:uppercase; color:#73859a; margin-bottom:3px;
+}
+#page-title{
+  margin:0; font-size:clamp(22px,1.8vw,32px); line-height:1;
+  font-weight:800; color:#18324d; display:flex; align-items:center; gap:12px;
+}
+.reg-badge{
+  font-size:14px; font-weight:800; letter-spacing:.03em; color:#fff;
+  background:#1b4d5f; padding:5px 12px; border-radius:999px;
+  vertical-align:middle;
+}
+.header-right{display:flex; align-items:center; gap:18px}
+.live-pill{
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:11px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--green); background:rgba(22,163,74,.1);
+  border:1px solid rgba(22,163,74,.25); padding:5px 11px; border-radius:999px;
+}
+.live-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2.2s ease-in-out infinite}
+.live-pill.erro{color:var(--red); background:rgba(220,38,38,.1); border-color:rgba(220,38,38,.25)}
+.live-pill.erro .dot{background:var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.header-info{
+  min-width:230px; padding:8px 12px; border:1px solid var(--line); border-radius:14px;
+  background:linear-gradient(180deg,#fbfdff 0%,#f3f7fb 100%); text-align:right;
+}
+.header-label{
+  font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+  color:#708296; margin-bottom:3px;
+}
+.header-value{font-size:15px;font-weight:800;color:#10243d;font-variant-numeric:tabular-nums}
+#errorBanner{
+  display:none; flex:0 0 auto;
+  background:#fef2f2; color:#991b1b; border:1px solid #fecaca;
+  border-radius:14px; padding:10px 16px; font-size:13px; font-weight:600;
+}
+.panel-card{display:flex; flex-direction:column; overflow:hidden; flex:1 1 auto; min-height:0}
+.section-head{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:10px 16px; background:linear-gradient(180deg,#fbfdff 0%,#f4f8fc 100%);
+  border-bottom:1px solid var(--line-soft); flex:0 0 auto;
+}
+.section-title{
+  font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:#264766;
+}
+.section-count{font-size:12px;font-weight:700;color:var(--muted)}
+.table-wrap{flex:1 1 auto; overflow:auto}
+.rank-table{width:100%; border-collapse:collapse}
+.rank-table th,.rank-table td{
+  padding:11px 14px; border-bottom:1px solid var(--line-soft);
+  text-align:left; font-size:13px; vertical-align:middle; white-space:nowrap;
+}
+.rank-table thead th{
+  position:sticky; top:0; z-index:1;
+  background:#f8fbff; font-size:10px; font-weight:800; text-transform:uppercase;
+  letter-spacing:.08em; color:#476581;
+}
+.rank-table tbody tr:last-child td{border-bottom:none}
+.rank-table tbody tr:hover{background:#f8fbfe}
+.rank-table tbody tr.conh-alto{
+  background:linear-gradient(90deg, rgba(220,38,38,.16) 0%, rgba(255,255,255,1) 32%);
+  box-shadow:inset 4px 0 0 var(--red);
+}
+.rank-table tbody tr.conh-alto:hover{
+  background:linear-gradient(90deg, rgba(220,38,38,.24) 0%, #fef2f2 32%);
+}
+.rank-table tbody tr.conh-alto .cell-main{color:#991b1b; font-weight:800}
+.num-col{text-align:right; font-variant-numeric:tabular-nums}
+.cell-main{font-weight:700; color:#11253e}
+.cell-subtle{color:#6b7e94; font-size:11.5px; font-weight:500}
+.status-pill{
+  display:inline-flex; align-items:center; gap:7px;
+  min-width:120px; padding:5px 10px; border-radius:999px;
+  font-size:10.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase;
+  color:#fff;
+}
+.status-pill .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.85)}
+.status-green{background:var(--green)}
+.status-blue{background:var(--blue)}
+.status-orange{background:var(--orange)}
+.status-red{background:var(--red)}
+.status-amber{background:var(--amber)}
+.empty-state{padding:40px;color:#6b8097;text-align:center}
+.empty-state .big{font-weight:800;color:#18324d;margin-bottom:4px}
+footer{
+  flex:0 0 auto; display:flex; justify-content:space-between;
+  font-size:11px; color:var(--muted); padding:0 4px;
+}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#c7d3df;border-radius:5px}
+@media (max-width:900px){
+  .header-card{flex-direction:column;align-items:flex-start}
+  .header-right{width:100%;justify-content:space-between}
+}
+</style>
+</head>
+<body>
+  <div class="page-shell">
+
+    <header class="header-card card">
+      <div class="header-left">
+        <div class="eyebrow">Acompanhamento de Despacho</div>
+        <h1 id="page-title">TOP 30 CHI <span class="reg-badge" id="regionalBadge"></span></h1>
+      </div>
+      <div class="header-right">
+        <div class="live-pill" id="livePill"><span class="dot"></span><span id="statusText">conectando…</span></div>
+        <div class="header-info">
+          <div class="header-label">Última atualização dos dados</div>
+          <div class="header-value" id="updatedAt">—</div>
+        </div>
+      </div>
+    </header>
+
+    <div id="errorBanner"></div>
+
+    <section class="card panel-card">
+      <div class="section-head">
+        <div class="section-title">Incidências ativas</div>
+        <div class="section-count" id="rowCount">0 incidências</div>
+      </div>
+      <div class="table-wrap">
+        <table class="rank-table">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Incidência</th>
+              <th>Previsão</th>
+              <th>Tensão</th>
+              <th>AL</th>
+              <th class="num-col">Tempo total</th>
+              <th class="num-col">Tempo status</th>
+              <th class="num-col">Conh.</th>
+              <th class="num-col">N.Av.</th>
+              <th class="num-col">Cli.Af.</th>
+              <th class="num-col">Cli.Tf.</th>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <tr><td colspan="12"><div class="empty-state"><div class="big">Carregando dados…</div>Primeira raspagem em andamento</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+<script>
+const STATUS_COLOR = { 'flag-green':'green', 'flag-blue':'blue', 'flag-orange':'orange', 'flag-red':'red', 'flag-yellow':'amber', 'flag-amber':'amber' };
+
+function parseTempoParaMinutos(t){
+  if(!t) return 0;
+  const m = t.match(/(\d+):(\d+)/);
+  if(!m) return 0;
+  return parseInt(m[1],10)*60 + parseInt(m[2],10);
+}
+
+function parseNumero(t){
+  if(t === null || t === undefined || t === '') return 0;
+  const s = String(t).trim().replace(/\./g, '').replace(/,/g, '.');
+  const n = Number(s.replace(/[^0-9.-]/g, ''));
+  return Number.isFinite(n) ? n : 0;
+}
+
+function render(data){
+  const livePill = document.getElementById('livePill');
+  const statusText = document.getElementById('statusText');
+  const banner = document.getElementById('errorBanner');
+
+  if(data.status === 'ok'){
+    livePill.classList.remove('erro');
+    statusText.textContent = 'ao vivo';
+    banner.style.display = 'none';
+  } else if(data.status === 'sessao_expirada'){
+    livePill.classList.add('erro');
+    statusText.textContent = 'sessão expirada';
+    banner.style.display = 'block';
+    banner.textContent = '⚠ A sessão de login expirou no coletor. Rode o updater novamente após relogar.';
+  } else if(data.status === 'erro'){
+    livePill.classList.add('erro');
+    statusText.textContent = 'erro na coleta';
+    banner.style.display = 'block';
+    banner.textContent = '⚠ Erro ao coletar dados: ' + (data.error_message || 'desconhecido') + ' — mostrando último dado válido.';
+  } else {
+    statusText.textContent = 'conectando…';
+  }
+
+  document.getElementById('regionalBadge').textContent = data.regional || '—';
+  document.getElementById('updatedAt').textContent = data.updated_at ? new Date(data.updated_at).toLocaleString('pt-BR') : '—';
+  document.getElementById('rowCount').textContent = (data.rows ? data.rows.length : 0) + ' incidências';
+
+  const tbody = document.getElementById('tbody');
+  if(!data.rows || data.rows.length === 0){
+    tbody.innerHTML = '<tr><td colspan="11"><div class="empty-state"><div class="big">Nenhuma incidência no filtro atual</div>Tudo tranquilo por aqui.</div></td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = data.rows.map(r => {
+    const isDespachado = /despachado/i.test(r.status_label || '');
+    const color = isDespachado ? 'amber' : (STATUS_COLOR[r.status_class] || 'blue');
+    const conhAlto = parseNumero(r.conh) >= 1000;
+    const linhaClasse = conhAlto ? 'conh-alto' : '';
+    return `
+      <tr class="${linhaClasse}">
+        <td><span class="status-pill status-${color}"><span class="dot"></span>${r.status_label || '—'}</span></td>
+        <td>
+          <span class="cell-main">${r.incidencia || '—'}</span>
+          ${r.viatura ? `<br><span class="cell-subtle">${r.viatura}</span>` : ''}
+        </td>
+        <td class="cell-subtle">${r.previsao || '—'}</td>
+        <td>${r.tensao || '—'}</td>
+        <td>${r.al || '—'}</td>
+        <td class="num-col cell-main">${r.tempo_total || '—'}</td>
+        <td class="num-col">${r.tempo_status || '—'}</td>
+        <td class="num-col">${r.conh || '—'}</td>
+        <td class="num-col">${r.n_av || '—'}</td>
+        <td class="num-col cell-main">${r.cli_af || '—'}</td>
+        <td class="num-col">${r.cli_tf || '—'}</td>
+      </tr>
+    `;
+  }).join('');
+}
+
+async function fetchData(){
+  try{
+    const res = await fetch('data.json', {cache:'no-store'});
+    const data = await res.json();
+    render(data);
+  }catch(e){
+    console.error('Falha ao buscar data.json', e);
+  }
+}
+
+fetchData();
+setInterval(fetchData, 15000);
+</script>
+</body>
+</html>
