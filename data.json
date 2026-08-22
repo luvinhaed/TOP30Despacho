@@ -1,23 +1,7 @@
 {
-  "updated_at": "2026-08-22T06:53:21",
+  "updated_at": "2026-08-22T07:10:17",
   "regional": "DNORT",
   "rows": [
-    {
-      "status_label": "Despachado",
-      "status_class": "flag-orange",
-      "incidencia": "0041838169",
-      "viatura": "STV-RD-30B",
-      "previsao": "22/08/2026 08:36",
-      "tensao": "BT",
-      "al": "VCS01C4",
-      "tempo_total": "05:25",
-      "tempo_agrupado": "",
-      "tempo_status": "01:05",
-      "conh": "5",
-      "n_av": "1",
-      "cli_af": "1",
-      "cli_tf": "-"
-    },
     {
       "status_label": "Despachado",
       "status_class": "flag-orange",
@@ -26,10 +10,26 @@
       "previsao": "22/08/2026 10:18",
       "tensao": "BT",
       "al": "MCB01M3",
-      "tempo_total": "00:38",
+      "tempo_total": "00:54",
       "tempo_agrupado": "",
-      "tempo_status": "00:33",
+      "tempo_status": "00:50",
       "conh": "1",
+      "n_av": "1",
+      "cli_af": "1",
+      "cli_tf": "-"
+    },
+    {
+      "status_label": "Despachado",
+      "status_class": "flag-orange",
+      "incidencia": "0041838465",
+      "viatura": "STV-RD-30B",
+      "previsao": "22/08/2026 14:14",
+      "tensao": "BT",
+      "al": "VCS01C2",
+      "tempo_total": "00:11",
+      "tempo_agrupado": "",
+      "tempo_status": "00:10",
+      "conh": "0",
       "n_av": "1",
       "cli_af": "1",
       "cli_tf": "-"
